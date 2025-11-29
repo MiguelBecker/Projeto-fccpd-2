@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  db:
+    build: ./db
+    volumes:
+      - desafio2-data:/data
+
+  reader:
+    build: ./reader
+    volumes:
+      - desafio2-data:/data
+
+volumes:
+  desafio2-data:

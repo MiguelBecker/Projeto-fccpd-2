@@ -5,22 +5,22 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.server
-    container_name: flask_server
-    networks:
-      - minha_rede
+    container_name: server
     ports:
       - "8080:8080"
+    networks:
+      - desafio1-net
 
   client:
     build:
       context: .
       dockerfile: Dockerfile.client
-    container_name: cliente_loop
-    networks:
-      - minha_rede
+    container_name: client
     depends_on:
       - server
+    networks:
+      - desafio1-net
 
 networks:
-  minha_rede:
+  desafio1-net:
     driver: bridge
