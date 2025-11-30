@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+  ms_a:
+    build: ./ms_a
+    container_name: ms_a
+    ports:
+      - "5001:5001"
+
+  ms_b:
+    build: ./ms_b
+    container_name: ms_b
+    environment:
+      SERVICE_A_URL: http://ms_a:5001
+    ports:
+      - "5002:5002"
+    depends_on:
+      - ms_a

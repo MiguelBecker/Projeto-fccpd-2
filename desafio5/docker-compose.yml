@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+
+  users:
+    build: ./users
+    container_name: users
+    ports:
+      - "5001:5001"
+    networks:
+      - internal
+
+  orders:
+    build: ./orders
+    container_name: orders
+    ports:
+      - "5002:5002"
+    networks:
+      - internal
+
+  gateway:
+    build: ./gateway
+    container_name: gateway
+    ports:
+      - "9000:9000"
+    depends_on:
+      - users
+      - orders
+    environment:
+      USERS_URL: http://users:5001/users
+      ORDERS_URL: http://orders:5002/orders
+    networks:
+      - internal
+
+networks:
+  internal:
